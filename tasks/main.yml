@@ -1,2 +1,4 @@
 ---
 # tasks file for ansible-role-amazon-cloudwatch
+- name: Install cloudwatch agent
+  include_tasks: "setup-{{ ansible_os_family }}.yml"

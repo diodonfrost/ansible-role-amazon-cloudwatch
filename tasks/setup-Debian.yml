@@ -1,0 +1,19 @@
+# This task avoids downloading cloudwatch-agent every time
+- name: Debian | Check if cloudwatch-agent is present
+  command: "/usr/bin/amazon-cloudwatch-agent-ctl -h"
+  register: cloudwatch_agent_installed
+  ignore_errors: yes
+  changed_when: false
+  failed_when: false
+
+- name: Debian | install cloudwatch agent
+  apt:
+    deb: "https://s3.amazonaws.com/amazoncloudwatch-agent/{{ ansible_distribution|lower }}/amd64/latest/amazon-cloudwatch-agent.deb"
+    state: present
+  when: cloudwatch_agent_installed.rc != 0
+
+- name: Debian | Cloudwatch agent service
+  service:
+    name: amazon-cloudwatch-agent
+    state: started
+    enabled: yes
