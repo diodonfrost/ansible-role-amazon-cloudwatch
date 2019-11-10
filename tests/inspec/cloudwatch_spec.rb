@@ -1,4 +1,5 @@
 amazon_cloudwatch_package = 'amazon-cloudwatch-agent'
+amazon_cloudwatch_service = 'amazon-cloudwatch-agent'
 
 control 'cloudwatch-01' do
   impact 1.0
@@ -9,3 +10,12 @@ control 'cloudwatch-01' do
   end
 end
 
+control 'cloudwatch-02' do
+  impact 1.0
+  title 'Amazon cloudwatch service'
+  desc 'Amazon cloudwatch service should be running and enabled'
+  describe service(amazon_cloudwatch_service) do
+    it { should be_enabled }
+    it { should be_running }
+  end
+end
