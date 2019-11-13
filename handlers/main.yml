@@ -1,2 +1,6 @@
 ---
 # handlers file for ansible-role-amazon-cloudwatch
+- name: Restart cloudwatch service
+  service:
+    name: amazon-cloudwatch-agent
+    state: restarted

@@ -4,3 +4,9 @@
     state: started
     enabled: yes
   when: ansible_test_mode
+
+- name: Linux | Cloudwatch config
+  copy:
+    content: "{{ cloudwatch_config }}"
+    dest: /opt/aws/amazon-cloudwatch-agent/bin/config.json
+  notify: Restart cloudwatch service

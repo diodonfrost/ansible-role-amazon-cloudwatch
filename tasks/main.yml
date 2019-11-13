@@ -5,3 +5,6 @@
 
 - name: Install cloudwatch agent
   include_tasks: "setup-{{ ansible_system }}.yml"
+
+- name: Configure cloudwatch agent
+  include_tasks: "configure-{{ ansible_system }}.yml"
