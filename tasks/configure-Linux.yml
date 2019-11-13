@@ -1,0 +1,6 @@
+- name: Linux | Cloudwatch agent service
+  service:
+    name: amazon-cloudwatch-agent
+    state: started
+    enabled: yes
+  when: ansible_test_mode

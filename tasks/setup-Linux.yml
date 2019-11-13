@@ -1,0 +1,40 @@
+# This task avoids downloading cloudwatch-agent every time
+- name: Linux | Check if cloudwatch-agent is present
+  command: "/usr/bin/amazon-cloudwatch-agent-ctl -h"
+  register: cloudwatch_agent_installed
+  ignore_errors: yes
+  changed_when: false
+  failed_when: false
+
+- name: Dnf | Install Cloudwatch agent
+  dnf:
+    name: "https://s3.amazonaws.com/amazoncloudwatch-agent/{{ os_name }}/amd64/latest/amazon-cloudwatch-agent.rpm"
+    state: present
+  when:
+    - cloudwatch_agent_installed.rc != 0
+    - ansible_pkg_mgr == "dnf"
+
+- name: Yum | Install Cloudwatch agent
+  yum:
+    name: "https://s3.amazonaws.com/amazoncloudwatch-agent/{{ os_name }}/amd64/latest/amazon-cloudwatch-agent.rpm"
+    state: present
+  when:
+    - cloudwatch_agent_installed.rc != 0
+    - ansible_pkg_mgr == "yum"
+
+- name: Apt | Install Cloudwatch agent
+  apt:
+    deb: "https://s3.amazonaws.com/amazoncloudwatch-agent/{{ os_name }}/amd64/latest/amazon-cloudwatch-agent.deb"
+    state: present
+  when:
+    - cloudwatch_agent_installed.rc != 0
+    - ansible_pkg_mgr == "apt"
+
+- name: Zypper | Install Cloudwatch agent
+  zypper:
+    name: "https://s3.amazonaws.com/amazoncloudwatch-agent/{{ os_name }}/amd64/latest/amazon-cloudwatch-agent.rpm"
+    disable_gpg_check: yes
+    state: present
+  when:
+    - cloudwatch_agent_installed.rc != 0
+    - ansible_pkg_mgr == "zypper"

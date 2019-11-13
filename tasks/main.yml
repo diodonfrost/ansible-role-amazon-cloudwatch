@@ -1,4 +1,7 @@
 ---
 # tasks file for ansible-role-amazon-cloudwatch
+- name: Include OS specific variables.
+  include_vars: "{{ ansible_distribution }}.yml"
+
 - name: Install cloudwatch agent
-  include_tasks: "setup-{{ ansible_os_family }}.yml"
+  include_tasks: "setup-{{ ansible_system }}.yml"

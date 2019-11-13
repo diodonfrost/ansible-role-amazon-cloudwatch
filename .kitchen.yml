@@ -13,6 +13,8 @@ provisioner:
   require_ruby_for_busser: false
   require_ansible_omnibus: false
   idempotency_test: true
+  extra_vars:
+    ansible_test_mode: true
 
 verifier:
   name: inspec

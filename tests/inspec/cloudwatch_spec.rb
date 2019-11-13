@@ -9,13 +9,3 @@ control 'cloudwatch-01' do
     it { should be_installed }
   end
 end
-
-control 'cloudwatch-02' do
-  impact 1.0
-  title 'Amazon cloudwatch service'
-  desc 'Amazon cloudwatch service should be running and enabled'
-  describe service(amazon_cloudwatch_service) do
-    it { should be_enabled }
-    it { should be_running }
-  end
-end
