@@ -1,38 +1,181 @@
-Role Name
-=========
+# ansible-role-amazon-cloudwatch
 
-A brief description of the role goes here.
+[![Build Status](https://travis-ci.org/diodonfrost/ansible-role-amazon-cloudwatch.svg?branch=master)](https://travis-ci.org/diodonfrost/ansible-role-amazon-cloudwatch)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-diodonfrost.amazon_cloudwatch-660198.svg)](https://galaxy.ansible.com/diodonfrost/amazon_cloudwatch)
 
-Requirements
-------------
+This role provide a compliance for install amazon-cloudwatch on your target host.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Requirements
 
-Role Variables
---------------
+This role was developed using Ansible 2.5 Backwards compatibility is not guaranteed.
+Use `ansible-galaxy install diodonfrost.amazon_cloudwatch` to install the role on your system.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Supported platforms:
 
-Dependencies
-------------
+```yaml
+- name: EL
+  versions:
+    - 8
+    - 7
+    - 6
+- name: Debian
+  versions:
+    - buster
+    - stretch
+    - jessie
+- name: Ubuntu
+  versions:
+    - bionic
+    - xenial
+    - trusty
+- name: Amazon
+  versions:
+    - 2017.12
+    - 2016.03
+- name: opensuse
+  versions:
+    - 15.1
+    - 15
+```
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Role Variables
 
-Example Playbook
-----------------
+This role does not have a variable
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```yaml
+---
+# defaults file for ansible-role-amazon-cloudwatch
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+cloudwatch_config: '{
+	"agent": {
+		"metrics_collection_interval": 60,
+		"run_as_user": "root"
+	},
+	"metrics": {
+		"metrics_collected": {
+			"collectd": {
+				"metrics_aggregation_interval": 60
+			},
+			"cpu": {
+				"measurement": [
+					"cpu_usage_idle"
+				],
+				"metrics_collection_interval": 60,
+				"resources": [
+					"*"
+				],
+				"totalcpu": true
+			},
+			"disk": {
+				"measurement": [
+					"used_percent"
+				],
+				"metrics_collection_interval": 60,
+				"resources": [
+					"*"
+				]
+			},
+			"diskio": {
+				"measurement": [
+					"write_bytes",
+					"read_bytes",
+					"writes",
+					"reads"
+				],
+				"metrics_collection_interval": 60,
+				"resources": [
+					"*"
+				]
+			},
+			"mem": {
+				"measurement": [
+					"mem_used_percent"
+				],
+				"metrics_collection_interval": 60
+			},
+			"net": {
+				"measurement": [
+					"bytes_sent",
+					"bytes_recv",
+					"packets_sent",
+					"packets_recv"
+				],
+				"metrics_collection_interval": 60,
+				"resources": [
+					"*"
+				]
+			},
+			"statsd": {
+				"metrics_aggregation_interval": 60,
+				"metrics_collection_interval": 10,
+				"service_address": ":8125"
+			},
+			"swap": {
+				"measurement": [
+					"swap_used_percent"
+				],
+				"metrics_collection_interval": 60
+			}
+		}
+	}
+}'
+```
 
-License
--------
+## Dependencies
 
-BSD
+None
 
-Author Information
-------------------
+## Example Playbook
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+This is a sample playbook file for deploying the Ansible Galaxy 
+role in a localhost and installing latest amazon-cloudwatch version.
+
+```yaml
+---
+- hosts: localhost
+  become: true
+  roles:
+    - role: diodonfrost.amazon_cloudwatch
+```
+
+## Local Testing
+
+The preferred way of locally testing the role is to use Docker. You will have to install Docker on your system.
+
+Next install test-kitchen:
+
+```shell
+# Install dependencies
+gem install bundler
+bundle install
+```
+
+### Testing with Docker
+
+```shell
+# List all tests with kitchen
+kitchen list
+
+# fast test on one machine
+kitchen test default-centos-8
+
+# test on all machines
+kitchen test
+
+# for development, create environment
+kitchen create default-centos-8
+
+# Apply ansible playbook
+kitchen converge default-centos-8
+
+# Apply inspec tests
+kitchen verify default-centos-8
+```
+
+## License
+
+Apache 2
+
+## Author Information
+
+This role was created in 2019 by diodonfrost.
