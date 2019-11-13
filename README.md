@@ -119,6 +119,9 @@ cloudwatch_config: '{
 		}
 	}
 }'
+
+# Use during integration test
+ansible_test_mode: false
 ```
 
 ## Dependencies
