@@ -69,9 +69,9 @@ platforms:
       platform: centos
 
   # Ubuntu
-  - name: ubuntu-19.04
+  - name: ubuntu-20.04
     driver:
-      image: diodonfrost/ubuntu-19.04-ansible
+      image: diodonfrost/ubuntu-20.04-ansible
       platform: ubuntu
   - name: ubuntu-18.04
     driver:
