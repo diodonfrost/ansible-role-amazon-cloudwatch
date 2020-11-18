@@ -1,6 +1,5 @@
 # ansible-role-amazon-cloudwatch
 
-[![Build Status](https://travis-ci.com/diodonfrost/ansible-role-amazon-cloudwatch.svg?branch=master)](https://travis-ci.com/diodonfrost/ansible-role-amazon-cloudwatch)
 [![CI](https://github.com/diodonfrost/ansible-role-amazon-cloudwatch/workflows/CI/badge.svg)](https://github.com/diodonfrost/ansible-role-amazon-cloudwatch/actions)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-diodonfrost.amazon_cloudwatch-660198.svg)](https://galaxy.ansible.com/diodonfrost/amazon_cloudwatch)
 
