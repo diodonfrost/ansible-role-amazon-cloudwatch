@@ -9,6 +9,7 @@
 - name: Dnf | Install Cloudwatch agent
   dnf:
     name: "https://s3.amazonaws.com/amazoncloudwatch-agent/{{ os_name }}/amd64/latest/amazon-cloudwatch-agent.rpm"
+    disable_gpg_check: yes # https://github.com/aws/amazon-ssm-agent/issues/235
     state: present
   when:
     - cloudwatch_agent_installed.rc != 0
