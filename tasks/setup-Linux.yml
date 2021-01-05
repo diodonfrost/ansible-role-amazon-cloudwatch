@@ -5,6 +5,7 @@
   ignore_errors: yes
   changed_when: false
   failed_when: false
+  check_mode: no
 
 - name: Dnf | Install Cloudwatch agent
   dnf:
