@@ -144,36 +144,28 @@ role in a localhost and installing latest amazon-cloudwatch version.
 
 ## Local Testing
 
-The preferred way of locally testing the role is to use Docker. You will have to install Docker on your system.
+This project uses [Molecule](http://molecule.readthedocs.io/) to aid in the
+development and testing.
 
-Next install test-kitchen:
+To develop or test you'll need to have installed the following:
 
-```shell
-# Install dependencies
-gem install bundler
-bundle install
-```
+* Linux (e.g. [Ubuntu](http://www.ubuntu.com/))
+* [Docker](https://www.docker.com/)
+* [Python](https://www.python.org/) (including python-pip)
+* [Ansible](https://www.ansible.com/)
+* [Molecule](http://molecule.readthedocs.io/)
 
 ### Testing with Docker
 
 ```shell
-# List all tests with kitchen
-kitchen list
+# Test role on CentOS 8
+molecule test
 
-# fast test on one machine
-kitchen test default-centos-8
+# Test role on Ubuntu 20.04
+image=ansible-ubuntu:20.04 molecule test
 
-# test on all machines
-kitchen test
-
-# for development, create environment
-kitchen create default-centos-8
-
-# Apply ansible playbook
-kitchen converge default-centos-8
-
-# Apply inspec tests
-kitchen verify default-centos-8
+# Test role on Opensuse Leap
+image=ansible-opensuse:leap molecule test
 ```
 
 ## License

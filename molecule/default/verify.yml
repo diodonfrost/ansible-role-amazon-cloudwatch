@@ -1,0 +1,15 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Linux | Cloudwatch agent should be installed
+      package:
+        name: amazon-cloudwatch-agent
+        state: present
+      register: agent_install
+
+    - name: Linux | Verify commands outputs
+      assert:
+        that:
+          - not agent_install.changed
+        success_msg: "All tests passed"

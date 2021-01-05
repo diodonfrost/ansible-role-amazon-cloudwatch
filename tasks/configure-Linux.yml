@@ -9,4 +9,7 @@
   copy:
     content: "{{ cloudwatch_config }}"
     dest: /opt/aws/amazon-cloudwatch-agent/bin/config.json
+    owner: root
+    group: root
+    mode: '0644'
   notify: Restart cloudwatch service
