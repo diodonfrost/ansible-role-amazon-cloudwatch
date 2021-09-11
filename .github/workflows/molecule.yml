@@ -47,10 +47,10 @@ jobs:
 
       - name: Test Ansible role
         run: molecule test
-        env: 
+        env:
           image: ansible-${{ matrix.distribution }}
 
       - name: Test Ansible role with check_mode enable
         run: molecule check
-        env: 
+        env:
           image: ansible-${{ matrix.distribution }}
